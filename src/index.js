@@ -1,26 +1,18 @@
 import Vmap from './vmap/vmap';
-import OverviewMap from 'ol/control/OverviewMap';
-import ScaleLine from 'ol/control/ScaleLine';
-import MousePosition from 'ol/control/MousePosition';;
-import Zoom from 'ol/control/Zoom'; {
-    const mainMap = new Vmap();
-    const overviewMap = new OverviewMap({
-        tipLabel: '미니맵',
-        collapsed: false,
-        className: 'ol-zoom'
+import Vworld from './vmap/basemap/vworld';
+import MouseWheelZoom from 'ol/interaction/MouseWheelZoom'; {
+    const midnightMap = Vworld.getMidnight();
+    midnightMap.setVisible(false);
+    const satelliteMap = Vworld.getSatellite();
+    const hybridMap = Vworld.getHybrid();
+    const layers = [midnightMap, satelliteMap, hybridMap];
+    const mainMap = new Vmap({
+        layers: layers
     });
-    const scaleLine = new ScaleLine({
-
+    const mouseWheelZoom = new MouseWheelZoom({
+        duration: 350,
+        timeout: 50
     });
-    const mousePosition = new MousePosition({
-
-    });
-    const zoom = new Zoom({
-
-    });
-    mainMap._map.addControl(overviewMap);
-    mainMap._map.addControl(scaleLine);
-    mainMap._map.addControl(mousePosition);
-    mainMap._map.addControl(zoom);
+    mainMap._map.addInteraction(mouseWheelZoom);
     console.log('안녕하소');
 }
