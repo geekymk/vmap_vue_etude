@@ -12,5 +12,6 @@ body {
     bottom: 0;
     width: 100%;
     background-image: url(/images/pre_background.png);
-    background-color: #ebecec;
+    /* background-color: #ebecec; */
+    background-color: #f5f1e8;
 }
